@@ -8,9 +8,8 @@ const glob = require('glob-all');
 module.exports = function (options) {
     options = options || {};
     options = _.defaults(options, {
-        cleanGlobs: ['./*/**']
+        cleanGlobs: ['*/**']
     });
-
     return through.obj(function (manifest, enc, cb) {
         var manifestContent = JSON.parse(manifest.contents.toString(enc));
         var allowedFiles = [];
