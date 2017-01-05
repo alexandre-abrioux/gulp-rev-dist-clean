@@ -1,0 +1,26 @@
+{
+  "name": "@gulp-rev-clean/gulp-rev-clean",
+  "version": "1.0.0",
+  "description": "Delete all files not listed in rev-manifest.json in the specificied directories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandre-abrioux/gulp-rev-clean.git"
+  },
+  "keywords": [
+    "gulp",
+    "rev",
+    "clean",
+    "gulp-rev",
+    "gulp-rev-clean"
+  ],
+  "author": "Alexandre ABRIOUX",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexandre-abrioux/gulp-rev-clean/issues"
+  },
+  "homepage": "https://github.com/alexandre-abrioux/gulp-rev-clean#readme"
+}
