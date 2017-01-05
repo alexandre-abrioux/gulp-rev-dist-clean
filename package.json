@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/alexandre-abrioux/gulp-rev-clean/issues"
   },
-  "homepage": "https://github.com/alexandre-abrioux/gulp-rev-clean#readme"
+  "homepage": "https://github.com/alexandre-abrioux/gulp-rev-clean#readme",
+  "dependencies": {
+    "del": "^2.2.2",
+    "glob-all": "^3.1.0",
+    "lodash": "^4.17.4",
+    "through2": "^2.0.3"
+  }
 }
