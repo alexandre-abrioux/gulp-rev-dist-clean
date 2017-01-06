@@ -1,5 +1,5 @@
 {
-  "name": "@gulp-rev-clean/gulp-rev-clean",
+  "name": "@alexandre-abrioux/gulp-rev-clean",
   "version": "1.0.0",
   "description": "Delete all files not listed in rev-manifest.json in the specificied directories",
   "main": "index.js",
@@ -25,8 +25,7 @@
   "homepage": "https://github.com/alexandre-abrioux/gulp-rev-clean#readme",
   "dependencies": {
     "del": "^2.2.2",
-    "glob-all": "^3.1.0",
-    "lodash": "^4.17.4",
+    "fs": "0.0.1-security",
     "through2": "^2.0.3"
   }
 }

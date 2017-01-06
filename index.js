@@ -1,32 +1,33 @@
 'use strict';
 
-const through = require('through2');
-const _ = require('lodash');
 const del = require('del');
-const glob = require('glob-all');
+const fs = require('fs');
+const through = require('through2');
 
-module.exports = function (options) {
-    options = options || {};
-    options = _.defaults(options, {
-        cleanGlobs: ['*/**']
-    });
-    return through.obj(function (manifest, enc, cb) {
-        var manifestContent = JSON.parse(manifest.contents.toString(enc));
+module.exports = function (revManifestFile) {
+    try {
+        var revManifestContent = JSON.parse(fs.readFileSync(revManifestFile, {encoding: "utf8"}));
         var allowedFiles = [];
-        allowedFiles.push.apply(allowedFiles, _.keysIn(manifestContent));
-        allowedFiles.push.apply(allowedFiles, _.valuesIn(manifestContent));
-        var globOptions = {
-            base: typeof manifest.base !== 'undefined' ? manifest.base : '.',
-            cwd: typeof manifest.cwd !== 'undefined' ? manifest.cwd : '.',
-            nodir: true
-        };
-        var files = glob.sync(options.cleanGlobs, globOptions);
+        for (var asset in revManifestContent) {
+            if (revManifestContent.hasOwnProperty(asset)) {
+                allowedFiles.push(asset);
+                allowedFiles.push(revManifestContent[asset]);
+            }
+        }
         var filesToDel = [];
-        files.forEach(function (file) {
-            if (allowedFiles.indexOf(file) < 0)
-                filesToDel.push(file);
-        });
-        del.sync(filesToDel, globOptions);
-        cb();
+    } catch (err) {
+        console.error('Error while reading the specified manifest file (is the path correct?).');
+        throw err;
+    }
+    return through.obj(function (file, enc, cb) {
+        // replace backslashes with forward slashes for Windows systems
+        if (allowedFiles.indexOf(file.relative.replace(/\\/g, '/')) < 0 && fs.lstatSync(file.path).isFile()) {
+            filesToDel.push(file.path);
+            return cb();
+        }
+        return cb(null, file)
+    }, function (cb) {
+        del.sync(filesToDel);
+        return cb();
     });
 };
