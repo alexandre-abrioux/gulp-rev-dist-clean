@@ -1,5 +1,5 @@
 {
-  "name": "@alexandre-abrioux/gulp-rev-clean",
+  "name": "gulp-rev-dist-clean",
   "version": "1.0.0",
   "description": "Delete all files not listed in rev-manifest.json in the specificied directories",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexandre-abrioux/gulp-rev-clean.git"
+    "url": "git@github.com:alexandre-abrioux/gulp-rev-dist-clean.git"
   },
   "keywords": [
     "gulp",
