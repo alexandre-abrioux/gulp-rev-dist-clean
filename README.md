@@ -19,7 +19,7 @@ For instance, according to the following `rev-manifest.json` file:
 and the following directory tree:
 
 ```
-assets
+build/assets
 |_______ css
          |_______ libs.css
          |_______ libs-beaeb26c53.css
@@ -34,20 +34,20 @@ assets
          |_______ main-beaeb26c53.js
 ```
 the plugin will always delete:
-- `assets/css/old-file.css`
-- `assets/css/old-file-55900dd045.css`
+- `build/assets/css/old-file.css`
+- `build/assets/css/old-file-55900dd045.css`
 
 and can optionnaly delete either the revised files (via the `keepRenamedFiles` option):
-- `assets/css/libs-beaeb26c53.css`
-- `assets/css/main-3b7de4f4f1.css`
-- `assets/js/libs-a90857797b.js`
-- `assets/js/main-beaeb26c53.js`
+- `build/assets/css/libs-beaeb26c53.css`
+- `build/assets/css/main-3b7de4f4f1.css`
+- `build/assets/js/libs-a90857797b.js`
+- `build/assets/js/main-beaeb26c53.js`
 
 and/or the original files (via the `keepOriginalFiles` option):
-- `assets/css/libs.css`
-- `assets/css/main.css`
-- `assets/js/libs.js`
-- `assets/js/main.js`
+- `build/assets/css/libs.css`
+- `build/assets/css/main.css`
+- `build/assets/js/libs.js`
+- `build/assets/js/main.js`
 
 ## Prerequisites
 
@@ -112,7 +112,7 @@ gulp.src(['build/assets/**/*'], {read: false})
 Type: `boolean`
 Default: `true`
 
-[yes/no] Keep the original dist files [yes/no] (cf. [How It Works](#how-it-works) for an exemple)
+[yes/no] Keep the original revised files [yes/no] (cf. [How It Works](#how-it-works) for an exemple)
 
 
 ### keepRenamedFiles
