@@ -4,14 +4,20 @@ const del = require('del');
 const fs = require('fs');
 const through = require('through2');
 
-module.exports = function (revManifestFile) {
+module.exports = function (revManifestFile, opts) {
+    opts = Object.assign({
+        keepOriginalFiles: true,
+        keepRenamedFiles: true
+    }, opts);
     try {
         var revManifestContent = JSON.parse(fs.readFileSync(revManifestFile, {encoding: "utf8"}));
         var allowedFiles = [];
         for (var asset in revManifestContent) {
             if (revManifestContent.hasOwnProperty(asset)) {
-                allowedFiles.push(asset);
-                allowedFiles.push(revManifestContent[asset]);
+                if (opts.keepOriginalFiles)
+                    allowedFiles.push(asset);
+                if (opts.keepRenamedFiles)
+                    allowedFiles.push(revManifestContent[asset]);
             }
         }
         var filesToDel = [];
