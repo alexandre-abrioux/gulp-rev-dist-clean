@@ -15,9 +15,9 @@ module.exports = function (revManifestFile, opts) {
         for (var asset in revManifestContent) {
             if (revManifestContent.hasOwnProperty(asset)) {
                 if (opts.keepOriginalFiles)
-                    allowedFiles.push(asset);
+                    allowedFiles.push(asset.replace(/\\/g, '/'));
                 if (opts.keepRenamedFiles)
-                    allowedFiles.push(revManifestContent[asset]);
+                    allowedFiles.push(revManifestContent[asset].replace(/\\/g, '/'));
             }
         }
         var filesToDel = [];
@@ -26,7 +26,6 @@ module.exports = function (revManifestFile, opts) {
         throw err;
     }
     return through.obj(function (file, enc, cb) {
-        // replace backslashes with forward slashes for Windows systems
         if (allowedFiles.indexOf(file.relative.replace(/\\/g, '/')) < 0 && fs.lstatSync(file.path).isFile()) {
             filesToDel.push(file.path);
             return cb();
