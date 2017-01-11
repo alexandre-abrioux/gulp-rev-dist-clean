@@ -13,12 +13,10 @@ module.exports = function (revManifestFile, opts) {
         var revManifestContent = JSON.parse(fs.readFileSync(revManifestFile, {encoding: "utf8"}));
         var allowedFiles = [];
         for (var asset in revManifestContent) {
-            if (revManifestContent.hasOwnProperty(asset)) {
-                if (opts.keepOriginalFiles)
-                    allowedFiles.push(asset.replace(/\\/g, '/'));
-                if (opts.keepRenamedFiles)
-                    allowedFiles.push(revManifestContent[asset].replace(/\\/g, '/'));
-            }
+            if (opts.keepOriginalFiles)
+                allowedFiles.push(asset.replace(/\\/g, '/'));
+            if (opts.keepRenamedFiles)
+                allowedFiles.push(revManifestContent[asset].replace(/\\/g, '/'));
         }
         var filesToDel = [];
     } catch (err) {
