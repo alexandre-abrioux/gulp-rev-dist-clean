@@ -1,6 +1,6 @@
 {
   "name": "gulp-rev-dist-clean",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Delete all files not listed in rev-manifest.json in the specificied directories",
   "main": "index.js",
   "scripts": {
