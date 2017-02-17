@@ -1,6 +1,6 @@
 # gulp-rev-dist-clean
 
-`gulp-rev-dist-clean` is a gulp plugin that will allow you to easily clean the temporary and legacy files created by the [gulp-rev](https://github.com/sindresorhus/gulp-rev) plugin.
+`gulp-rev-dist-clean` is a gulp package that will allow you to easily clean temporary and legacy files created by the [gulp-rev](https://github.com/sindresorhus/gulp-rev) plugin.
 
 ## How It Works
 
