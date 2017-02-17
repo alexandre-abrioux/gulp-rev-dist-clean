@@ -1,7 +1,7 @@
 {
   "name": "gulp-rev-dist-clean",
-  "version": "1.0.3",
-  "description": "Delete all files not listed in rev-manifest.json in the specificied directories",
+  "version": "1.0.4",
+  "description": "Clean temporary files created by gulp-rev",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
