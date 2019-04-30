@@ -23,6 +23,9 @@
   "files": [
     "index.js"
   ],
+  "engines": {
+    "node": ">=6"
+  },
   "dependencies": {
     "del": "^2.2.2",
     "fs": "0.0.1-security",
