@@ -1,15 +1,9 @@
 {
   "name": "gulp-rev-dist-clean",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Clean temporary files created by gulp-rev",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:alexandre-abrioux/gulp-rev-dist-clean.git"
-  },
+  "author": "Alexandre ABRIOUX",
+  "license": "MIT",
   "keywords": [
     "gulp",
     "rev",
@@ -17,15 +11,40 @@
     "gulp-rev",
     "gulp-rev-clean"
   ],
-  "author": "Alexandre ABRIOUX",
-  "license": "ISC",
+  "homepage": "https://github.com/alexandre-abrioux/gulp-rev-clean#readme",
   "bugs": {
     "url": "https://github.com/alexandre-abrioux/gulp-rev-clean/issues"
   },
-  "homepage": "https://github.com/alexandre-abrioux/gulp-rev-clean#readme",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:alexandre-abrioux/gulp-rev-dist-clean.git"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "dependencies": {
     "del": "^2.2.2",
     "fs": "0.0.1-security",
     "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.1",
+    "gulp-debug": "^4.0.0",
+    "gulp-rev": "^9.0.0",
+    "mocha": "^6.1.4",
+    "should": "^13.2.3",
+    "stream-assert": "^2.0.3",
+    "xo": "^0.24.0"
+  },
+  "scripts": {
+    "test": "xo && mocha",
+    "xo": "xo"
+  },
+  "xo": {
+    "prettier": true,
+    "rules": {
+      "import/no-unassigned-import": 0
+    }
   }
 }
