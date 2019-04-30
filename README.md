@@ -1,16 +1,18 @@
-![npm version](https://badgen.net/npm/v/gulp-rev-dist-clean)
+[![npm version](https://badgen.net/npm/v/gulp-rev-dist-clean)](https://www.npmjs.com/package/gulp-rev-dist-clean)
+&nbsp;
+[![travisci](https://badgen.net/travis/alexandre-abrioux/gulp-rev-dist-clean)](https://travis-ci.com/alexandre-abrioux/gulp-rev-dist-clean.svg?branch=master)
 &nbsp;
 ![npm downloads](https://badgen.net/npm/dt/gulp-rev-dist-clean)
 &nbsp;
-![xo](https://badgen.net/xo/status/gulp-rev-dist-clean)
+[![xo](https://badgen.net/xo/status/gulp-rev-dist-clean)](https://github.com/xojs/xo)
 &nbsp;
-![license](https://badgen.net/github/license/alexandre-abrioux/gulp-rev-dist-clean)
+[![license](https://badgen.net/github/license/alexandre-abrioux/gulp-rev-dist-clean)](https://github.com/alexandre-abrioux/gulp-rev-dist-clean/blob/master/LICENSE)
 
 # gulp-rev-dist-clean
 
 `gulp-rev-dist-clean` is a gulp package to ease clean-up of temporary and legacy files created by the [gulp-rev](https://github.com/sindresorhus/gulp-rev) plugin.
 
-[![NPM](https://nodei.co/npm/gulp-rev-dist-clean.png)](https://nodei.co/npm/gulp-rev-dist-clean/)
+[![NPM](https://nodei.co/npm/gulp-rev-dist-clean.png)](https://www.npmjs.com/package/gulp-rev-dist-clean)
 
 ## How It Works
 
