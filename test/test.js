@@ -5,8 +5,8 @@ const assert = require('stream-assert');
 const del = require('del');
 const rev = require('gulp-rev');
 const through = require('through2');
-const revDistClean = require('..');
 const mocha = require('mocha');
+const revDistClean = require('..');
 require('should');
 
 const fixturesPath = path.join(__dirname, 'fixtures');
