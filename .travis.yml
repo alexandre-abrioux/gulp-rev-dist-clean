@@ -8,3 +8,8 @@ node_js:
   - '12'
   - '10'
 after_success: npm run coverage
+deploy:
+  edge: true
+  provider: npm
+  on:
+    tags: true
