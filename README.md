@@ -2,6 +2,8 @@
 &nbsp;
 [![travisci](https://badgen.net/travis/alexandre-abrioux/gulp-rev-dist-clean)](https://travis-ci.com/alexandre-abrioux/gulp-rev-dist-clean)
 &nbsp;
+[![Coverage Status](https://coveralls.io/repos/github/alexandre-abrioux/gulp-rev-dist-clean/badge.svg?branch=master)](https://coveralls.io/github/alexandre-abrioux/gulp-rev-dist-clean?branch=master)
+&nbsp;
 ![npm downloads](https://badgen.net/npm/dt/gulp-rev-dist-clean)
 &nbsp;
 [![xo](https://badgen.net/xo/status/gulp-rev-dist-clean)](https://github.com/xojs/xo)
