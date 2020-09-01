@@ -8,8 +8,14 @@ node_js:
   - '12'
   - '10'
 after_success: npm run coverage
-deploy:
-  edge: true
-  provider: npm
-  on:
-    tags: true
+
+jobs:
+  include:
+    - stage: npm release
+      node_js: '14'
+      script: echo "Deploying to npm ..."
+      deploy:
+        edge: true
+        provider: npm
+        on:
+          tags: true
