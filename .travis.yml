@@ -13,7 +13,8 @@ jobs:
   include:
     - stage: npm release
       node_js: '14'
-      script: echo "Deploying to npm ..."
+      script: echo "deploying to npm ..."
+      after_success: echo "after script skipped ..."
       deploy:
         edge: true
         provider: npm
