@@ -7,12 +7,12 @@ help:		## Displays this help message
 
 .PHONY: install
 install: 	## Installs npm packages
-	bin/npm ci
+	bin/npm install
 
 .PHONY: test
 test: 		## Runs unit test
 	bin/npm run test
 
-.PHONY: fix
-fix: 		## Fixes JS files with XO
+.PHONY: lint
+lint: 		## Fixes JS files with XO
 	bin/npm run xo -- --fix

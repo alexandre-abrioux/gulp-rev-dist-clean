@@ -1,0 +1,8 @@
+/.editorconfig
+/.gitattributes
+/.gitignore
+/.nyc_output/
+/bin/
+/Makefile
+/package-lock.json
+/test/
