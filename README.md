@@ -21,7 +21,7 @@
 The plugin parses the `rev-manifest.json` file created by [gulp-rev](https://github.com/sindresorhus/gulp-rev) and compares it to your directory tree, deleting tempory files that you do not wish to keep.
 
 For instance, according to the following `rev-manifest.json` file:
-```
+```json
 {
   "css/libs.css": "css/libs-beaeb26c53.css",
   "css/main.css": "css/main-3b7de4f4f1.css",
@@ -34,19 +34,19 @@ and the following directory tree:
 
 ```
 build/assets
-|_______ css
-         |_______ libs.css
-         |_______ libs-beaeb26c53.css
-         |_______ main.css
-         |_______ main-3b7de4f4f1.css
-         |_______ old-file.css
-         |_______ old-file-55900dd045.css
-|_______ js
-         |_______ libs.js
-         |_______ libs-a90857797b.js
-         |_______ main.js
-         |_______ main-beaeb26c53.js
-|_______ rev-manifest.json
+├─── css
+│    ├─── libs.css
+│    ├─── libs-beaeb26c53.css
+│    ├─── main.css
+│    ├─── main-3b7de4f4f1.css
+│    ├─── old-file.css
+│    └─── old-file-55900dd045.css
+├─── js
+│    ├─── libs.js
+│    ├─── libs-a90857797b.js
+│    ├─── main.js
+│    └─── main-beaeb26c53.js=
+└─── rev-manifest.json
 ```
 the plugin will always delete the following files, because they are not listed in the manifest:
 - `build/assets/css/old-file.css`
@@ -70,7 +70,7 @@ and/or the manifest file itself (via the `keepManifestFile` option):
 ## Prerequisites
 
 You already have a task creating a manifest file via the [gulp-rev](https://github.com/sindresorhus/gulp-rev) plugin:
-```
+```js
 const gulp = require('gulp');
 const rev = require('gulp-rev');
 
@@ -87,7 +87,7 @@ gulp.task('default', () =>
 ## Installation
 
 First, install the plugin via npm:
-```
+```bash
 npm install --save-dev gulp-rev-dist-clean
 ```
 
@@ -95,7 +95,7 @@ npm install --save-dev gulp-rev-dist-clean
 
 Add the plugin to the imported node modules and create a new task as following.
 The plugin will clean all the matching directories according to the specified manifest file. 
-```
+```js
 const gulp = require('gulp');
 const rev = require('gulp-rev');
 const revDistClean = require('gulp-rev-dist-clean');
@@ -122,7 +122,7 @@ gulp.task('rev-dist-clean', () =>
 ## Options
 
 Options can be passed as the second parameter:
-```
+```js
 gulp.src(['build/assets/**/*'], {read: false})
     .pipe(revDistClean('build/assets/rev-manifest.json', {keepRenamedFiles: false}))
 ```
