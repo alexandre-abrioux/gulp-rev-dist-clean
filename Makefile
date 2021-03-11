@@ -15,4 +15,4 @@ test: 		## Runs unit test
 
 .PHONY: lint
 lint: 		## Fixes JS files with XO
-	bin/npm run xo -- --fix
+	bin/npm run lint

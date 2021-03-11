@@ -5,20 +5,19 @@ const assert = require('stream-assert');
 const del = require('del');
 const rev = require('gulp-rev');
 const through = require('through2');
-const mocha = require('mocha');
+const {expect} = require('chai');
 const revDistClean = require('..');
-require('should');
 
 const fixturesPath = path.join(__dirname, 'fixtures');
 const buildPath = path.join(__dirname, 'build');
 const manifestFile = path.join(buildPath, 'rev-manifest.json');
 
-mocha.describe('gulp-rev-dist-clean', () => {
-    mocha.describe('revDistClean()', () => {
+describe('gulp-rev-dist-clean', () => {
+    describe('revDistClean()', () => {
         let countFiles;
         let countDirs;
 
-        mocha.beforeEach((done) => {
+        beforeEach((done) => {
             del.sync([buildPath]);
             countFiles = 0;
             countDirs = 0;
@@ -38,12 +37,11 @@ mocha.describe('gulp-rev-dist-clean', () => {
                 .pipe(assert.end(done));
         });
 
-        mocha.afterEach((done) => {
+        afterEach(() => {
             del.sync([buildPath]);
-            done();
         });
 
-        mocha.it('should clean dist files', (done) => {
+        it('should clean dist files', (done) => {
             fs.mkdirSync(path.join(buildPath, 'old'));
             fs.mkdirSync(path.join(buildPath, 'old/old'));
             fs.mkdirSync(path.join(buildPath, 'img/old'));
@@ -64,23 +62,78 @@ mocha.describe('gulp-rev-dist-clean', () => {
                 // + original files
                 // + revised files
                 // + a manifest file
-                // + a `old` empty of files
+                // + a `old` directory empty of files
                 // + a `old/old` directory empty of files
                 // + a `img/old` directory empty of files
                 .pipe(assert.length(countDirs + countFiles * 2 + 1 + 1 + 1 + 1))
                 .pipe(assert.end(done));
         });
 
-        mocha.it('should emit an error on missing manifest', (done) => {
+        it('should emit an error on missing manifest', () => {
             fs.unlinkSync(manifestFile);
-            try {
-                revDistClean(manifestFile);
-            } catch (error) {
-                error.message.should.eql(
-                    'gulp-rev-dist-clean: error while reading the specified manifest file. Is the path correct?'
-                );
-                done();
-            }
+            expect(revDistClean.bind(revDistClean, manifestFile)).to.throw(
+                'gulp-rev-dist-clean: error while reading the specified manifest file. Is the path correct?'
+            );
+        });
+
+        it('should clean original files', (done) => {
+            gulp.src([path.join(buildPath, '**/*')], {read: false})
+                .pipe(
+                    revDistClean(manifestFile, {
+                        keepRenamedFiles: false,
+                        emitChunks: true
+                    })
+                )
+                // Original dirs
+                // + revised files
+                // + a manifest file
+                .pipe(assert.length(countDirs + countFiles + 1))
+                .pipe(assert.end(done));
+        });
+
+        it('should clean revision files', (done) => {
+            gulp.src([path.join(buildPath, '**/*')], {read: false})
+                .pipe(
+                    revDistClean(manifestFile, {
+                        keepRenamedFiles: false,
+                        emitChunks: true
+                    })
+                )
+                // Original dirs
+                // + original files
+                // + a manifest file
+                .pipe(assert.length(countDirs + countFiles + 1))
+                .pipe(assert.end(done));
+        });
+
+        it('should clean manifest file', (done) => {
+            gulp.src([path.join(buildPath, '**/*')], {read: false})
+                .pipe(
+                    revDistClean(manifestFile, {
+                        keepManifestFile: false,
+                        emitChunks: true
+                    })
+                )
+                // Original dirs
+                // + original files
+                // + revised files
+                .pipe(assert.length(countDirs + countFiles * 2))
+                .pipe(assert.end(done));
+        });
+
+        it('should output files', (done) => {
+            gulp.src([path.join(buildPath, '**/*')], {read: false})
+                .pipe(revDistClean(manifestFile))
+                .pipe(
+                    through.obj((chunk, enc, cb) => {
+                        const fileExists = fs.existsSync(
+                            path.join(buildPath, 'img/first.png')
+                        );
+                        expect(fileExists).to.be.true;
+                        cb(null, chunk);
+                    })
+                )
+                .pipe(assert.end(done));
         });
     });
 });

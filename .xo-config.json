@@ -1,0 +1,13 @@
+{
+  "prettier": true,
+  "envs": [
+    "node",
+    "mocha"
+  ],
+  "plugins": [
+    "chai-friendly"
+  ],
+  "extends": [
+    "plugin:chai-friendly/recommended"
+  ]
+}

@@ -2,6 +2,7 @@
 /.gitattributes
 /.gitignore
 /.nyc_output/
+/.xo-config.json
 /bin/
 /Makefile
 /package-lock.json
