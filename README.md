@@ -45,7 +45,7 @@ build/assets
 │    ├─── libs.js
 │    ├─── libs-a90857797b.js
 │    ├─── main.js
-│    └─── main-beaeb26c53.js=
+│    └─── main-beaeb26c53.js
 └─── rev-manifest.json
 ```
 the plugin will always delete the following files, because they are not listed in the manifest:
