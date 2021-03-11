@@ -28,7 +28,6 @@
   },
   "dependencies": {
     "del": "^5.1.0",
-    "fs": "0.0.1-security",
     "through2": "^4.0.2"
   },
   "devDependencies": {
