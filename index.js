@@ -13,6 +13,7 @@ module.exports = function (revManifestFile, options) {
         keepRenamedFiles: true,
         keepManifestFile: true,
         emitChunks: false,
+        forceDelete: false,
         ...options
     };
     try {
@@ -61,7 +62,7 @@ module.exports = function (revManifestFile, options) {
             return cb();
         },
         (cb) => {
-            del.sync(filesToDel);
+            del.sync(filesToDel, { force: options.forceDelete });
             return cb();
         }
     );

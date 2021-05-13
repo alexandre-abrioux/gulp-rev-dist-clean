@@ -157,7 +157,18 @@ Type: `boolean`
 Default: `false`
 
 Set to `true` if you need to `pipe()` the files to another gulp plugin.
+
 When set to false nothing will get emitted to the stream.
+
+### forceDelete
+Type: `boolean`
+
+Default: `false`
+
+Set to `true` if you want to force delete files in your directory. This option remove error
+```
+Cannot delete files/folders outside the current working directory. Can be overriden with the `force` option.
+```
 
 ## License
 
