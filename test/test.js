@@ -80,7 +80,7 @@ describe('gulp-rev-dist-clean', () => {
             gulp.src([path.join(buildPath, '**/*')], {read: false})
                 .pipe(
                     revDistClean(manifestFile, {
-                        keepRenamedFiles: false,
+                        keepOriginalFiles: false,
                         emitChunks: true
                     })
                 )
