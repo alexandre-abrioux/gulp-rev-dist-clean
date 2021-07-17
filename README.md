@@ -159,6 +159,14 @@ Default: `false`
 Set to `true` if you need to `pipe()` the files to another gulp plugin.
 When set to false nothing will get emitted to the stream.
 
+### delOptions
+Type: `object`
+
+Default: `{}`
+
+Options to pass down to the `del` module whilst deleting files.
+See [`del` module documentation](https://www.npmjs.com/package/del#options) for the list of available options.
+
 ## License
 
 This project is licensed under the MIT License.

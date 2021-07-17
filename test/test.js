@@ -135,5 +135,29 @@ describe('gulp-rev-dist-clean', () => {
                 )
                 .pipe(assert.end(done));
         });
+
+        it('should pass down delOptions to del module', (done) => {
+            gulp.task('process', () =>
+                gulp.src([path.join(buildPath, '**/*')], {read: false}).pipe(
+                    revDistClean(manifestFile, {
+                        keepOriginalFiles: false,
+                        delOptions: {dryRun: true}
+                    })
+                )
+            );
+            gulp.task('assert', () =>
+                gulp
+                    .src([path.join(buildPath, '**/*')], {read: false})
+                    // Nothing should be deleted
+                    // Original dirs
+                    // + original files
+                    // + revised files
+                    // + a manifest file
+                    .pipe(assert.length(countDirs + countFiles * 2 + 1))
+                    .pipe(assert.end(done))
+            );
+            gulp.task('test', gulp.series('process', 'assert'));
+            gulp.task('test')();
+        });
     });
 });
