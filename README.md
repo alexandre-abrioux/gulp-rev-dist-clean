@@ -165,7 +165,7 @@ Type: `object`
 Default: `{}`
 
 Options to pass down to the `del` module whilst deleting files.
-See [`del` module documentation](https://www.npmjs.com/package/del#options) for the list of available options.
+See [`del` module documentation](https://www.npmjs.com/package/del#options) for a list of available options.
 
 ## License
 
