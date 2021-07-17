@@ -25,6 +25,7 @@ module.exports = function (revManifestFile, options) {
         }
 
         for (const asset in revManifestContent) {
+            /* istanbul ignore else */
             if (
                 Object.prototype.hasOwnProperty.call(revManifestContent, asset)
             ) {
