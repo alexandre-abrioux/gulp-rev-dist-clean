@@ -1,6 +1,6 @@
 [![npm version](https://badgen.net/npm/v/gulp-rev-dist-clean)](https://www.npmjs.com/package/gulp-rev-dist-clean)
 &nbsp;
-[![travisci](https://badgen.net/travis/alexandre-abrioux/gulp-rev-dist-clean)](https://travis-ci.com/alexandre-abrioux/gulp-rev-dist-clean)
+[![travisci](https://badgen.net/travis/alexandre-abrioux/gulp-rev-dist-clean)](https://app.travis-ci.com/github/alexandre-abrioux/gulp-rev-dist-clean)
 &nbsp;
 [![Coverage Status](https://coveralls.io/repos/github/alexandre-abrioux/gulp-rev-dist-clean/badge.svg?branch=master)](https://coveralls.io/github/alexandre-abrioux/gulp-rev-dist-clean?branch=master)
 &nbsp;
