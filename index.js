@@ -11,6 +11,7 @@ module.exports = function (revManifestFile, options) {
     options = {
         keepOriginalFiles: true,
         keepRenamedFiles: true,
+        keepSourceMapFiles: false,
         keepManifestFile: true,
         emitChunks: false,
         delOptions: {},
@@ -38,11 +39,18 @@ module.exports = function (revManifestFile, options) {
                         revManifestContent[asset].replace(/\\/g, '/')
                     );
                 }
+
+                if (options.keepSourceMapFiles) {
+                    allowedFiles.push(
+                        revManifestContent[asset].replace(/\\/g, '/') + '.map'
+                    );
+                }
             }
         }
-    } catch {
+    } catch (error) {
         throw new Error(
-            'gulp-rev-dist-clean: error while reading the specified manifest file. Is the path correct?'
+            'gulp-rev-dist-clean: error while reading the specified manifest file. Is the path correct? ' +
+                error.message
         );
     }
 
