@@ -1,40 +1,47 @@
 const path = require('path');
 const fs = require('fs');
 const gulp = require('gulp');
+const gulpif = require('gulp-if');
 const assert = require('stream-assert');
 const del = require('del');
 const rev = require('gulp-rev');
 const through = require('through2');
 const {expect} = require('chai');
+const sourcemaps = require('gulp-sourcemaps');
 const revDistClean = require('..');
 
 const fixturesPath = path.join(__dirname, 'fixtures');
 const buildPath = path.join(__dirname, 'build');
 const manifestFile = path.join(buildPath, 'rev-manifest.json');
+let countFiles;
+let countDirs;
+
+const buildDist = (done, enableSourcemaps = false) => {
+    del.sync([buildPath]);
+    countFiles = 0;
+    countDirs = 0;
+    gulp.src([path.join(fixturesPath, '**/*')], {base: fixturesPath})
+        .pipe(
+            through.obj((file, enc, cb) => {
+                countFiles += file.isDirectory() ? 0 : 1;
+                countDirs += file.isDirectory() ? 1 : 0;
+                return cb(null, file);
+            })
+        )
+        .pipe(gulp.dest(buildPath))
+        .pipe(gulpif(enableSourcemaps, sourcemaps.init()))
+        .pipe(rev())
+        .pipe(gulpif(enableSourcemaps, sourcemaps.write('.')))
+        .pipe(gulp.dest(buildPath))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest(buildPath))
+        .pipe(assert.end(done));
+};
 
 describe('gulp-rev-dist-clean', () => {
     describe('revDistClean()', () => {
-        let countFiles;
-        let countDirs;
-
         beforeEach((done) => {
-            del.sync([buildPath]);
-            countFiles = 0;
-            countDirs = 0;
-            gulp.src([path.join(fixturesPath, '**/*')], {base: fixturesPath})
-                .pipe(
-                    through.obj((file, enc, cb) => {
-                        countFiles += file.isDirectory() ? 0 : 1;
-                        countDirs += file.isDirectory() ? 1 : 0;
-                        return cb(null, file);
-                    })
-                )
-                .pipe(gulp.dest(buildPath))
-                .pipe(rev())
-                .pipe(gulp.dest(buildPath))
-                .pipe(rev.manifest())
-                .pipe(gulp.dest(buildPath))
-                .pipe(assert.end(done));
+            buildDist(done);
         });
 
         afterEach(() => {
@@ -119,6 +126,46 @@ describe('gulp-rev-dist-clean', () => {
                 // + revised files
                 .pipe(assert.length(countDirs + countFiles * 2))
                 .pipe(assert.end(done));
+        });
+
+        it('should clean map files by default', async () => {
+            await new Promise((resolve) => {
+                buildDist(resolve, true);
+            });
+            await new Promise((resolve, reject) => {
+                gulp.src([path.join(buildPath, '**/*')], {read: false})
+                    .pipe(revDistClean(manifestFile, {emitChunks: true}))
+                    // Original dirs
+                    // + original files
+                    // + revised files
+                    // + a manifest file
+                    .pipe(assert.length(countDirs + countFiles * 2 + 1))
+                    .on('assertion', reject)
+                    .pipe(assert.end(resolve));
+            });
+        });
+
+        it('should keep map files', async () => {
+            await new Promise((resolve) => {
+                buildDist(resolve, true);
+            });
+            await new Promise((resolve, reject) => {
+                gulp.src([path.join(buildPath, '**/*')], {read: false})
+                    .pipe(
+                        revDistClean(manifestFile, {
+                            keepSourceMapFiles: true,
+                            emitChunks: true
+                        })
+                    )
+                    // Original dirs
+                    // + original files
+                    // + revised files
+                    // + source map files
+                    // + a manifest file
+                    .pipe(assert.length(countDirs + countFiles * 3 + 1))
+                    .on('assertion', reject)
+                    .pipe(assert.end(resolve));
+            });
         });
 
         it('should output files', (done) => {
