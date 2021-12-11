@@ -134,9 +134,7 @@ describe('gulp-rev-dist-clean', () => {
             });
             await new Promise((resolve, reject) => {
                 gulp.src([path.join(buildPath, '**/*')], {read: false})
-                    .pipe(
-                        revDistClean(manifestFile, {emitChunks: true})
-                    )
+                    .pipe(revDistClean(manifestFile, {emitChunks: true}))
                     // Original dirs
                     // + original files
                     // + revised files
