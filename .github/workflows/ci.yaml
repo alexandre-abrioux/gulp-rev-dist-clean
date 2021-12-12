@@ -1,7 +1,12 @@
 name: CI
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
 jobs:
   test:
     strategy:
@@ -14,7 +19,7 @@ jobs:
           - 10
           - 12
           - 14
-    name: test ${{ matrix.os }} nodejs.v${{ matrix.node-version }}
+    name: Test ${{ matrix.os }} Node.js v${{ matrix.node-version }}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -28,3 +33,14 @@ jobs:
           github-token: ${{ secrets.github_token }}
           parallel: true
           flag-name: run-${{ matrix.os }}-node-${{ matrix.node-version }}
+
+  finish:
+    name: Tests Finished
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@1.1.3
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
