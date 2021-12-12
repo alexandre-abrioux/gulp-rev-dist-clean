@@ -10,9 +10,9 @@ install: 	## Installs npm packages
 	bin/npm install
 
 .PHONY: test
-test: 		## Runs unit test
+test: 		## Runs unit tests
 	bin/npm run test
 
 .PHONY: lint
-lint: 		## Fixes JS files with XO
+lint: 		## Fixes TS files with prettier and eslint
 	bin/npm run lint

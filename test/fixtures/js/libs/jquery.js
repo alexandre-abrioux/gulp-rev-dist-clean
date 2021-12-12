@@ -1,1 +1,1 @@
-console.info('jquery');
+console.info("jquery");
