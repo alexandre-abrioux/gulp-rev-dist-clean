@@ -19,14 +19,15 @@
     "type": "git",
     "url": "git@github.com:alexandre-abrioux/gulp-rev-dist-clean.git"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
-    "index.js"
+    "/dist"
   ],
   "engines": {
     "node": ">=10"
   },
   "scripts": {
+    "build": "rm -Rf dist && tsc --build",
     "lint": "xo --fix",
     "watch": "mocha -w --exit",
     "test": "xo && nyc mocha --exit",
@@ -37,6 +38,13 @@
     "through2": "^4.0.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.0",
+    "@types/gulp": "^4.0.9",
+    "@types/gulp-if": "0.0.34",
+    "@types/gulp-rev": "^5.0.32",
+    "@types/gulp-sourcemaps": "0.0.35",
+    "@types/mocha": "^9.0.0",
+    "@types/through2": "^2.0.36",
     "chai": "^4.3.3",
     "coveralls": "^3.1.0",
     "eslint-plugin-chai-friendly": "^0.6.0",
@@ -47,7 +55,8 @@
     "mocha": "^8.1.3",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^15.1.0",
-    "stream-assert": "^2.0.3",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.3",
     "xo": "^0.33.1"
   }
 }
