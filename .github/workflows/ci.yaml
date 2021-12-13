@@ -1,14 +1,32 @@
 name: CI
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   pull_request:
-    branches:
-      - master
+    branches: [master]
 
 jobs:
-  test:
+  test-src:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm run test:lint
+      - run: npm run test
+      - uses: coverallsapp/github-action@1.1.3
+        with:
+          github-token: ${{ secrets.github_token }}
+      - run: npm run build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+  test-dist:
+    needs: test-src
     strategy:
       fail-fast: false
       matrix:
@@ -19,28 +37,24 @@ jobs:
           - 10
           - 12
           - 14
-    name: Test ${{ matrix.os }} Node.js v${{ matrix.node-version }}
+    name: test-dist-${{ matrix.os }}-node-${{ matrix.node-version }}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm test
-      - uses: coverallsapp/github-action@1.1.3
-        with:
-          github-token: ${{ secrets.github_token }}
-          parallel: true
-          flag-name: run-${{ matrix.os }}-node-${{ matrix.node-version }}
+      - run: npm run test:dist
 
-  finish:
-    name: Tests Finished
-    needs: test
+  test-all-success:
+    needs:
+      - test-src
+      - test-dist
     runs-on: ubuntu-latest
     steps:
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@1.1.3
-        with:
-          github-token: ${{ secrets.github_token }}
-          parallel-finished: true
+      - run: echo "done"

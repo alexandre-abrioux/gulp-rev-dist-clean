@@ -27,35 +27,40 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "rm -Rf dist && tsc --build",
-    "lint": "xo --fix",
-    "watch": "mocha -w --exit",
-    "test": "xo && tsc --noEmit && nyc --reporter=lcovonly --reporter=text mocha --exit",
-    "coverage": "nyc report --reporter=text-lcov"
+    "clean": "rm -Rf dist coverage test/build",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "lint": "prettier --write . && eslint --fix .",
+    "test": "jest --coverage=true",
+    "test:dist": "jest --config jest.dist.config.ts",
+    "test:lint": "prettier --check --loglevel=warn . && eslint . && tsc --noEmit"
   },
   "dependencies": {
     "del": "^5.1.0",
     "through2": "^4.0.2"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.0",
     "@types/gulp": "^4.0.9",
     "@types/gulp-if": "0.0.34",
     "@types/gulp-rev": "^5.0.32",
     "@types/gulp-sourcemaps": "0.0.35",
-    "@types/mocha": "^9.0.0",
+    "@types/jest": "^27.0.3",
     "@types/through2": "^2.0.36",
-    "chai": "^4.3.3",
-    "eslint-plugin-chai-friendly": "^0.6.0",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "eslint": "^8.4.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^25.3.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "gulp": "^4.0.2",
     "gulp-if": "^3.0.0",
     "gulp-rev": "^9.0.0",
     "gulp-sourcemaps": "^3.0.0",
-    "mocha": "^8.1.3",
+    "jest": "^27.4.4",
     "mocha-lcov-reporter": "^1.3.0",
-    "nyc": "^15.1.0",
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.1",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.3",
-    "xo": "^0.33.1"
+    "typescript": "^4.5.3"
   }
 }

@@ -1,0 +1,16 @@
+root: true
+parser: "@typescript-eslint/parser"
+plugins:
+  - "@typescript-eslint"
+  - "simple-import-sort"
+  - "jest"
+extends:
+  - "eslint:recommended"
+  - "plugin:@typescript-eslint/recommended"
+  - "plugin:jest/recommended"
+  - "prettier"
+rules:
+  "simple-import-sort/imports": "error"
+  "simple-import-sort/exports": "error"
+  "jest/no-done-callback": "off"
+  "jest/expect-expect": "off"

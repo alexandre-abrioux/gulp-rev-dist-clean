@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import del from 'del';
-import through from 'through2';
+import del from "del";
+import fs from "fs";
+import path from "path";
+import through from "through2";
 
 export type Options = {
     keepOriginalFiles?: boolean;
@@ -18,7 +18,7 @@ const defaultOptions: Options = {
     keepSourceMapFiles: false,
     keepManifestFile: true,
     emitChunks: false,
-    delOptions: {}
+    delOptions: {},
 };
 
 export default function revDistClean(
@@ -29,11 +29,11 @@ export default function revDistClean(
     const allowedFiles: string[] = [];
     const _options: Options = {
         ...defaultOptions,
-        ...options
+        ...options,
     };
     try {
         const revManifestContent: Record<string, string> = JSON.parse(
-            fs.readFileSync(revManifestFile, {encoding: 'utf8'})
+            fs.readFileSync(revManifestFile, { encoding: "utf8" })
         );
         if (_options.keepManifestFile) {
             allowedFiles.push(path.basename(revManifestFile));
@@ -45,18 +45,16 @@ export default function revDistClean(
                 Object.prototype.hasOwnProperty.call(revManifestContent, asset)
             ) {
                 if (_options.keepOriginalFiles) {
-                    allowedFiles.push(asset.replace(/\\/g, '/'));
+                    allowedFiles.push(asset.replace(/\\/g, "/"));
                 }
-
                 if (_options.keepRenamedFiles) {
                     allowedFiles.push(
-                        revManifestContent[asset].replace(/\\/g, '/')
+                        revManifestContent[asset].replace(/\\/g, "/")
                     );
                 }
-
                 if (_options.keepSourceMapFiles) {
                     allowedFiles.push(
-                        `${revManifestContent[asset].replace(/\\/g, '/')}.map`
+                        `${revManifestContent[asset].replace(/\\/g, "/")}.map`
                     );
                 }
             }
@@ -72,7 +70,7 @@ export default function revDistClean(
     return through.obj(
         (file, enc, cb) => {
             if (
-                !allowedFiles.includes(file.relative.replace(/\\/g, '/')) &&
+                !allowedFiles.includes(file.relative.replace(/\\/g, "/")) &&
                 fs.lstatSync(file.path).isFile()
             ) {
                 filesToDel.push(file.path);
