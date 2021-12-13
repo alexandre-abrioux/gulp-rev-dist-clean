@@ -7,7 +7,7 @@ import { init, write } from "gulp-sourcemaps";
 import path from "path";
 import through, { TransformCallback } from "through2";
 
-// use "index" to replace module in jest.dist.config.ts
+// use "index" to replace module in jest.lib.config.ts
 import revDistClean, { Options } from "../src/index";
 
 const fixturesPath = path.join(__dirname, "fixtures");

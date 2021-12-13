@@ -5,7 +5,7 @@ import defaultConfig from "./jest.config";
 const config: Config.InitialOptions = {
     ...defaultConfig,
     moduleNameMapper: {
-        "/src/index$": "<rootDir>/dist/index",
+        "/src/index$": "<rootDir>/lib/cjs/index",
     },
 };
 export default config;

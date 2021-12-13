@@ -22,10 +22,10 @@ jobs:
       - run: npm run build
       - uses: actions/upload-artifact@v2
         with:
-          name: dist
-          path: dist
+          name: lib
+          path: lib
 
-  test-dist:
+  test-lib:
     needs: test-src
     strategy:
       fail-fast: false
@@ -37,24 +37,45 @@ jobs:
           - 10
           - 12
           - 14
-    name: test-dist-${{ matrix.os }}-node-${{ matrix.node-version }}
+    name: test-lib-${{ matrix.os }}-node-${{ matrix.node-version }}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
-          name: dist
-          path: dist
+          name: lib
+          path: lib
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm run test:dist
+      - run: npm run test:lib
 
   test-all-success:
     needs:
       - test-src
-      - test-dist
+      - test-lib
     runs-on: ubuntu-latest
     steps:
       - run: echo "done"
+
+  publish:
+    if: github.ref == 'refs/heads/master'
+    needs: [test-all-success]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: lib
+          path: lib
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm run dist
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: ./dist/package.json
+          dryRun: true

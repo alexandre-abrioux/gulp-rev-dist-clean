@@ -1,0 +1,8 @@
+{
+  "remove": {
+    "devDependencies": "*",
+    "scripts": "*"
+  },
+  "copy": ["README.md", "LICENSE"],
+  "output": "dist"
+}
