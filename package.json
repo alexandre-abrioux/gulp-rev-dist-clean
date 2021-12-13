@@ -36,7 +36,7 @@
     "test:lint": "prettier --check --loglevel=warn . && eslint . && tsc --noEmit"
   },
   "dependencies": {
-    "del": "^5.1.0",
+    "del": "^6.0.0",
     "through2": "^4.0.2"
   },
   "devDependencies": {
