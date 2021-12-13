@@ -1,10 +1,10 @@
 [![npm version](https://badgen.net/npm/v/gulp-rev-dist-clean)](https://www.npmjs.com/package/gulp-rev-dist-clean)
 &nbsp;
+![npm downloads](https://badgen.net/npm/dt/gulp-rev-dist-clean)
+&nbsp;
 ![CI status](https://github.com/alexandre-abrioux/gulp-rev-dist-clean/actions/workflows/ci.yaml/badge.svg?branch=master)
 &nbsp;
-[![coverage status](https://coveralls.io/repos/github/alexandre-abrioux/gulp-rev-dist-clean/badge.svg?branch=master)](https://coveralls.io/github/alexandre-abrioux/gulp-rev-dist-clean?branch=master)
-&nbsp;
-![npm downloads](https://badgen.net/npm/dt/gulp-rev-dist-clean)
+[![codecov](https://codecov.io/gh/alexandre-abrioux/gulp-rev-dist-clean/branch/master/graph/badge.svg?token=NXIGKWEZ67)](https://codecov.io/gh/alexandre-abrioux/gulp-rev-dist-clean)
 &nbsp;
 [![license](https://badgen.net/github/license/alexandre-abrioux/gulp-rev-dist-clean)](https://github.com/alexandre-abrioux/gulp-rev-dist-clean/blob/master/LICENSE)
 

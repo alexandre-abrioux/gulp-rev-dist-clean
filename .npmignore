@@ -10,6 +10,7 @@
 /.gitignore
 /.npmignore
 /.prettierignore
+/codecov.yaml
 /jest.config.ts
 /jest.dist.config.ts
 /Makefile
