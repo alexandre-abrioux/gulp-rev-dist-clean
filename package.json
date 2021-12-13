@@ -1,6 +1,6 @@
 {
   "name": "gulp-rev-dist-clean",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Clean temporary files created by gulp-rev",
   "author": "Alexandre ABRIOUX",
   "license": "MIT",
