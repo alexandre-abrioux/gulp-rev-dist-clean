@@ -1,5 +1,6 @@
 /coverage/
 /dist/
+/lib/
 /node_modules/
 /package-lock.json
 /test/build/
